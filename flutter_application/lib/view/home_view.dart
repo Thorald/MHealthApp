@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'history_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,17 +9,28 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
       body: const Center(child: Text('Middle')),
-      bottomNavigationBar: bottomContainer(),
+      bottomNavigationBar: bottomContainer(context),
     );
   }
 
-  Widget bottomContainer() {
+  Widget bottomContainer(context) {
     return Container(
       height: 80, // 👈 REQUIRED
       padding: const EdgeInsets.all(12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: const [Text('Left'), Text('Right')],
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const HistoryView()),
+              );
+            },
+            child: const Text('Go to Page Two'),
+          ),
+          Text('Right'),
+        ],
       ),
     );
   }
