@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'history_view.dart';
+import 'connect_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,9 +14,9 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget bottomContainer(context) {
+  Widget bottomContainer(BuildContext context) {
     return Container(
-      height: 80, // 👈 REQUIRED
+      height: 80,
       padding: const EdgeInsets.all(12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -27,9 +28,17 @@ class HomePage extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => const HistoryView()),
               );
             },
-            child: const Text('Go to Page Two'),
+            child: const Text('History'),
           ),
-          Text('Right'),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ConnectView()),
+              );
+            },
+            child: const Text('Connect'),
+          ),
         ],
       ),
     );
