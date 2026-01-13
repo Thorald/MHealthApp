@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 // This is the History view screen
-
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
 
@@ -19,128 +18,88 @@ class HistoryView extends StatelessWidget {
   }
 }
 
-
-
-
-
 void main() => runApp(const MyApp());
 
-
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  static const String _title = 'SizedBox Widget Demo';
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: _title, home: MyStatelessWidget());
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: PreviousSwimsScreen(),
+    );
   }
 }
 
-
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({Key? key}) : super(key: key);
+class PreviousSwimsScreen extends StatelessWidget {
+  const PreviousSwimsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Previous Swims!')),
-      body: _buildStackWidget(),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            // The ovrview of the swims :D
+            SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(4, 150, 20, 20),
+              child: Center(
+                child: Column(
+                  children: const [
+                    Text(
+                      'Previous swims!',
+                        style: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.w400,
+                      ),
+                     ),
+                    SizedBox(height: 130), 
+
+                    _SwimCard('Swim 1'),
+                    _SwimCard('Swim 2'),
+                    _SwimCard('Swim 3'),
+                    _SwimCard('Swim 4'),
+                    _SwimCard('Swim 5'),
+                    _SwimCard('Swim 6'),
+                    _SwimCard('Swim 7'),
+                    _SwimCard('Swim 8'),
+                  ],
+                ),
+              ),
+            ),
+
+            // Logo (pinned to top-right)
+            Positioned(
+              top: 12,
+              right: 12,
+              child: Image.asset(
+                'assets/logo.png',
+                width: 70,
+                height: 70,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
-
-Widget _buildStackWidget() {
-  return SafeArea(
-    child: Stack(
-      children: [
-        // Your scrollable content
-        SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 20),
-          child: Center(
-            child: Column(
-              children: const [
-                SizedBox(height: 120), // space so logo doesn't overlap title/content
-
-                SizedBox(
-                  width: 300,
-                  height: 50,
-                  child: Card(
-                    color: Color.fromARGB(255, 204, 204, 204),
-                    child: Center(child: Text('Swim 1')),
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  height: 50,
-                  child: Card(
-                    color: Color.fromARGB(255, 204, 204, 204),
-                    child: Center(child: Text('Swim 2')),
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  height: 50,
-                  child: Card(
-                    color: Color.fromARGB(255, 204, 204, 204),
-                    child: Center(child: Text('Swim 3')),
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  height: 50,
-                  child: Card(
-                    color: Color.fromARGB(255, 204, 204, 204),
-                    child: Center(child: Text('Swim 4')),
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  height: 50,
-                  child: Card(
-                    color: Color.fromARGB(255, 204, 204, 204),
-                    child: Center(child: Text('Swim 5')),
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  height: 50,
-                  child: Card(
-                    color: Color.fromARGB(255, 204, 204, 204),
-                    child: Center(child: Text('Swim 6')),
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  height: 50,
-                  child: Card(
-                    color: Color.fromARGB(255, 204, 204, 204),
-                    child: Center(child: Text('Swim 7')),
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  height: 50,
-                  child: Card(
-                    color: Color.fromARGB(255, 204, 204, 204),
-                    child: Center(child: Text('Swim 8')),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-
-        // Logo pinned to top-right (must be a direct child of Stack)
-        Positioned(
-          top: 12,
-          right: 12,
-          child: Image.asset(
-            'assets/logo.png',
-            width: 90,
-            height: 90,
-            fit: BoxFit.contain,
-          ),
-        ),
-      ],
-    ),
-  );
 }
+
+class _SwimCard extends StatelessWidget {
+  final String text;
+  const _SwimCard(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 300,
+      height: 50,
+      child: Card(
+        color: Color.fromARGB(255, 204, 204, 204),
+        child: Center(child: Text(text)),
+      ),
+    );
+  }
 }
