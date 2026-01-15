@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// This is the Connect view screen
+// This is the originalConnect view screen
 class ConnectView extends StatelessWidget {
   const ConnectView({super.key});
 
@@ -18,137 +18,137 @@ class ConnectView extends StatelessWidget {
   }
 }
 
-// A simple card widget to represent swim data
-class _DeviceCard extends StatelessWidget {
-  final String text;
-  const _DeviceCard(this.text);
+// // A simple card widget to represent swim data
+// class _DeviceCard extends StatelessWidget {
+//   final String text;
+//   const _DeviceCard(this.text);
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      height: 50,
-      child: Card(
-        color: Color.fromARGB(255, 204, 204, 204),
-        child: Center(child: Text(text)),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       width: 300,
+//       height: 50,
+//       child: Card(
+//         color: Color.fromARGB(255, 204, 204, 204),
+//         child: Center(child: Text(text)),
+//       ),
+//     );
+//   }
+// }
 
-void main() => runApp(const MyApp());
+// void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ConnectViewScreen(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: ConnectViewScreen(),
+//     );
+//   }
+// }
 
-class ConnectViewScreen extends StatelessWidget {
-  const ConnectViewScreen({super.key});
+// class ConnectViewScreen extends StatelessWidget {
+//   const ConnectViewScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // The overview of devices
-            SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(15, 10, 15, 5),
-              child: Center(
-                child: Column(
-                  children: [
-                    // Header area
-                    SizedBox(
-                      height: 150,
-                      width: double.infinity,
-                      child: Stack(
-                        children: [
-                          // Logo
-                          Positioned(
-                            top: 0,
-                            right: 0,
-                            child: Image.asset(
-                              'assets/logo.png',
-                              width: 70,
-                              height: 70,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: SafeArea(
+//         child: Stack(
+//           children: [
+//             // The overview of devices
+//             SingleChildScrollView(
+//               padding: const EdgeInsets.fromLTRB(15, 10, 15, 5),
+//               child: Center(
+//                 child: Column(
+//                   children: [
+//                     // Header area
+//                     SizedBox(
+//                       height: 150,
+//                       width: double.infinity,
+//                       child: Stack(
+//                         children: [
+//                           // Logo
+//                           Positioned(
+//                             top: 0,
+//                             right: 0,
+//                             child: Image.asset(
+//                               'assets/logo.png',
+//                               width: 70,
+//                               height: 70,
+//                               fit: BoxFit.contain,
+//                             ),
+//                           ),
 
-                          // Title + Bluetooth icon (icon beside the title)
-                          Positioned(
-                            top: 100,
-                            left: 0,
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  'assets/Bluetooth_icon.png',
-                                  width: 30,
-                                  height: 30,
-                                  fit: BoxFit.contain,
-                                ),
-                                const SizedBox(width: 12),
-                                const Text(
-                                  'Connect to Device',
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+//                           // Title + Bluetooth icon (icon beside the title)
+//                           Positioned(
+//                             top: 100,
+//                             left: 0,
+//                             child: Row(
+//                               children: [
+//                                 Image.asset(
+//                                   'assets/Bluetooth_icon.png',
+//                                   width: 30,
+//                                   height: 30,
+//                                   fit: BoxFit.contain,
+//                                 ),
+//                                 const SizedBox(width: 12),
+//                                 const Text(
+//                                   'Connect to Device',
+//                                   style: TextStyle(
+//                                     fontSize: 30,
+//                                     fontWeight: FontWeight.w600,
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
 
-                    const SizedBox(height: 130),
+//                     const SizedBox(height: 130),
 
-                    const _DeviceCard('Device 1'),
-                    const _DeviceCard('Device 2'),
-                    const _DeviceCard('Device 3'),
-                    const _DeviceCard('Device 4'),
-                    const _DeviceCard('Device 5'),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+//                     const _DeviceCard('Device 1'),
+//                     const _DeviceCard('Device 2'),
+//                     const _DeviceCard('Device 3'),
+//                     const _DeviceCard('Device 4'),
+//                     const _DeviceCard('Device 5'),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
 
-      // Bottom bar (placeholder for buttons later)
-      bottomNavigationBar: Container(
-        height: 80,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        decoration: const BoxDecoration(
-          color: Color(0xFFF2F2F2),
-          border: Border(top: BorderSide(color: Color(0xFFDDDDDD))),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            InkWell(
-              onTap: () => Navigator.pop(context),
-              child: const Row(
-                children: [
-                  Icon(Icons.arrow_back, size: 32),
-                  SizedBox(width: 8),
-                  Text('Back', style: TextStyle(fontSize: 18)),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//       // Bottom bar (placeholder for buttons later)
+//       bottomNavigationBar: Container(
+//         height: 80,
+//         padding: const EdgeInsets.symmetric(horizontal: 20),
+//         decoration: const BoxDecoration(
+//           color: Color(0xFFF2F2F2),
+//           border: Border(top: BorderSide(color: Color(0xFFDDDDDD))),
+//         ),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.end,
+//           children: [
+//             InkWell(
+//               onTap: () => Navigator.pop(context),
+//               child: const Row(
+//                 children: [
+//                   Icon(Icons.arrow_back, size: 32),
+//                   SizedBox(width: 8),
+//                   Text('Back', style: TextStyle(fontSize: 18)),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
