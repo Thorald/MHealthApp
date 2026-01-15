@@ -26,15 +26,13 @@ class ConnectViewCenter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: 150,
+        width: 80,
         height: 80,
         child: Transform.scale(
           scale: 1.4,
           child: FloatingActionButton(
             onPressed: () => print("nice"),
-            child: const Text(
-              "Connect to movesense device id: 038B2383:827we79re:8ww8e9r:92g3v3v9a8vah",
-            ),
+            child: const Text("Connect to movesense"),
           ),
         ),
       ),

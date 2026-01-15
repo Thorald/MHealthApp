@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'history_view.dart';
 import 'connect_view.dart';
+import 'during_swim_view.dart';
 
 // This is the Home view screen
 
@@ -11,10 +12,22 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
-      body: const Center(child: Text('Middle')),
+      body: HomePageBody(context),
       bottomNavigationBar: bottomContainer(context),
     );
   }
+
+  Center HomePageBody(context) => Center(
+    child: ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => DuringSwimView()),
+        );
+      },
+      child: const Text('Start Swim'),
+    ),
+  );
 
   Widget bottomContainer(BuildContext context) {
     return Container(
