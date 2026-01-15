@@ -11,6 +11,9 @@ class MovesenseDeviceConnected extends ChangeNotifier {
   StreamSubscription<MovesenseState>? stateSubscription;
   StreamSubscription<MovesenseHR>? hrSubscription;
 
+  // final _hrController = StreamController<MovesenseHR>.broadcast();
+  // Stream<MovesenseHR> get hrStream => _hrController.stream;
+
   Future<void> init() async {
     device.statusEvents.listen((status) => debugPrint('>> ${status.name}'));
   }
