@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/view_model/connect_view_model.dart';
 
 // This is the originalConnect view screen
 class ConnectView extends StatelessWidget {
@@ -8,12 +9,35 @@ class ConnectView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Connect')),
-      body: const Center(child: Text('Connect data')),
+      body: ConnectViewCenter(),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pop(context),
         child: const Icon(Icons.arrow_back),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    );
+  }
+}
+
+class ConnectViewCenter extends StatelessWidget {
+  const ConnectViewCenter({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        width: 150,
+        height: 80,
+        child: Transform.scale(
+          scale: 1.4,
+          child: FloatingActionButton(
+            onPressed: () => print("nice"),
+            child: const Text(
+              "Connect to movesense device id: 038B2383:827we79re:8ww8e9r:92g3v3v9a8vah",
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
