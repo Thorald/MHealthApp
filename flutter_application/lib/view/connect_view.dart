@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/view_model/connect_view_model.dart';
+import 'package:flutter_application/model/connect_model.dart';
 
 // This is the originalConnect view screen
 class ConnectView extends StatelessWidget {
@@ -51,7 +51,6 @@ class _ConnectViewCenterState extends State<ConnectViewCenter> {
 
           const SizedBox(height: 20),
           const Text('Your heart rate is:', style: TextStyle(fontSize: 18)),
-
           const SizedBox(height: 12),
 
           StreamBuilder(
