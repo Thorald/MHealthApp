@@ -8,9 +8,13 @@ class ConnectView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Connect')),
+      appBar: AppBar(
+        title: const Text('Connect'),
+        automaticallyImplyLeading: false, // remove app bar back button
+      ),
       body: ConnectViewCenter(),
       floatingActionButton: FloatingActionButton(
+        heroTag: "backbutton",
         onPressed: () => Navigator.pop(context),
         child: const Icon(Icons.arrow_back),
       ),
@@ -20,7 +24,9 @@ class ConnectView extends StatelessWidget {
 }
 
 class ConnectViewCenter extends StatelessWidget {
-  const ConnectViewCenter({super.key});
+  ConnectViewCenter({super.key});
+
+  final MovesenseDeviceConnected vm = MovesenseDeviceConnected();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,8 @@ class ConnectViewCenter extends StatelessWidget {
         child: Transform.scale(
           scale: 1.4,
           child: FloatingActionButton(
-            onPressed: () => print("nice"),
+            heroTag: "connectbutton",
+            onPressed: () => vm.connect(),
             child: const Text("Connect to movesense"),
           ),
         ),

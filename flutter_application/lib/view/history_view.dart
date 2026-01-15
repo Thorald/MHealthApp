@@ -7,7 +7,10 @@ class HistoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('History')),
+      appBar: AppBar(
+        title: const Text('History'),
+        automaticallyImplyLeading: false, // remove app bar back button
+      ),
       body: const Center(child: Text('History data')),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pop(context),
@@ -59,7 +62,6 @@ class PreviousSwimsScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-
             // The overview of the swims :D
             SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(15, 10, 15, 5),
@@ -71,33 +73,33 @@ class PreviousSwimsScreen extends StatelessWidget {
                       width: double.infinity,
                       child: Stack(
                         children: [
-                      // Logo
+                          // Logo
                           Positioned(
-                          top: 0,
-                          right: 0,
-                          child: Image.asset(
-                          'assets/logo.png',
-                          width: 70,
-                          height: 70,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
+                            top: 0,
+                            right: 0,
+                            child: Image.asset(
+                              'assets/logo.png',
+                              width: 70,
+                              height: 70,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
 
-                   // Title
+                          // Title
                           const Positioned(
-                          top: 100, 
-                          left: 0,
-                          child: Text(
-                          'Previous swims!',
-                          style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w600,
+                            top: 100,
+                            left: 0,
+                            child: Text(
+                              'Previous swims!',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
 
                     const SizedBox(height: 130),
 
