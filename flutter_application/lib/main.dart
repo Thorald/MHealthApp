@@ -18,6 +18,7 @@ void main() {
   runApp(const MyApp());
 }
 
+//Block
 late final MovesenseDeviceManager movesenseDeviceManager;
 
 class MyApp extends StatelessWidget {
