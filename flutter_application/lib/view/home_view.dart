@@ -8,17 +8,20 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
-      body: HomePageBody(context),
+      body: homePageBody(context),
       bottomNavigationBar: bottomContainer(context),
     );
   }
 
-  Center HomePageBody(context) => Center(
+  Center homePageBody(context) => Center(
     child: ElevatedButton(
       onPressed: () {
+        final duringswimViewModel = DuringswimViewModel();
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => DuringSwimView()),
+          MaterialPageRoute(
+            builder: (_) => DuringSwimView(viewModel: duringswimViewModel),
+          ),
         );
       },
       child: const Text('Start Swim'),
