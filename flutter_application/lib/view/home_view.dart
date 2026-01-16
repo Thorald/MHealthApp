@@ -5,7 +5,7 @@ import 'during_swim_view.dart';
 import 'package:flutter_application/model/during_swim_model.dart';
 
 // This is the Home view screen
-// test
+// tes
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
