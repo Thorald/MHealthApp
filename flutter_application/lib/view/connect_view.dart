@@ -2,38 +2,41 @@ part of '../main.dart';
 
 // This is the originalConnect view screen
 class ConnectView extends StatelessWidget {
-  const ConnectView({super.key});
+  final ConnectViewModel viewModel;
+
+  const ConnectView({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Connect'),
-        automaticallyImplyLeading: false, // remove app bar back button
+        automaticallyImplyLeading: false,
       ),
-      body: ConnectViewCenter(),
+      body: ConnectViewCenter(viewModel: viewModel),
       floatingActionButton: FloatingActionButton(
         heroTag: "backbutton",
         onPressed: () => Navigator.pop(context),
         child: const Icon(Icons.arrow_back),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
 
 class ConnectViewCenter extends StatefulWidget {
-  ConnectViewCenter({super.key});
+  final ConnectViewModel viewModel;
+
+  const ConnectViewCenter({super.key, required this.viewModel});
 
   @override
   State<ConnectViewCenter> createState() => _ConnectViewCenterState();
 }
 
 class _ConnectViewCenterState extends State<ConnectViewCenter> {
-  final MovesenseDeviceConnected vm = MovesenseDeviceConnected();
-
   @override
   Widget build(BuildContext context) {
+    final vm = widget.viewModel;
+
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -43,7 +46,7 @@ class _ConnectViewCenterState extends State<ConnectViewCenter> {
             scale: 1.4,
             child: FloatingActionButton(
               heroTag: "connectbutton",
-              onPressed: () => vm.connect(),
+              onPressed: vm.connect,
               child: const Icon(Icons.bluetooth),
             ),
           ),
@@ -51,14 +54,6 @@ class _ConnectViewCenterState extends State<ConnectViewCenter> {
           const SizedBox(height: 20),
           const Text('Your heart rate is:', style: TextStyle(fontSize: 18)),
           const SizedBox(height: 12),
-
-          StreamBuilder(
-            stream: vm.device.hr,
-            builder: (context, snapshot) => Text(
-              snapshot.hasData ? '${snapshot.data?.average}' : '...',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ),
         ],
       ),
     );

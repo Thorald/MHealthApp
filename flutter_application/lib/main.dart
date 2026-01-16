@@ -9,10 +9,14 @@ part 'view/connect_view.dart';
 part 'view/history_view.dart';
 part 'view/during_swim_view.dart';
 
-part 'view_model/connect_view_model.dart';
+part 'view_model/connect_viewmodel.dart';
+part 'view_model/home_viewmodel.dart';
 
-part 'model/connect_model.dart';
+part 'model/movesense_device_manager.dart';
 part 'model/during_swim_model.dart';
+
+//Block
+final MovesenseDeviceManager movesenseDeviceManager = MovesenseDeviceManager();
 
 void main() {
   runApp(const MyApp());
@@ -26,4 +30,3 @@ class MyApp extends StatelessWidget {
     return MaterialApp(title: 'Viking app', home: const HomePage());
   }
 }
-//testing

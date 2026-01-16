@@ -43,9 +43,12 @@ class HomePage extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
+              final connectViewModel = ConnectViewModel();
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const ConnectView()),
+                MaterialPageRoute(
+                  builder: (_) => ConnectView(viewModel: connectViewModel),
+                ),
               );
             },
             child: const Text('Connect'),
