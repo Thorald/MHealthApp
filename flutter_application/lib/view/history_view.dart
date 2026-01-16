@@ -21,23 +21,23 @@ class HistoryView extends StatelessWidget {
   }
 }
 
-// A simple card widget to represent swim data
-class _SwimCard extends StatelessWidget {
-  final String text;
-  const _SwimCard(this.text);
+// // A simple card widget to represent swim data
+// class _SwimCard extends StatelessWidget {
+//   final String text;
+//   const _SwimCard(this.text);
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      height: 50,
-      child: Card(
-        color: Color.fromARGB(255, 204, 204, 204),
-        child: Center(child: Text(text)),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       width: 300,
+//       height: 50,
+//       child: Card(
+//         color: Color.fromARGB(255, 204, 204, 204),
+//         child: Center(child: Text(text)),
+//       ),
+//     );
+//   }
+// }
 
 // void main() => runApp(const MyApp());
 
