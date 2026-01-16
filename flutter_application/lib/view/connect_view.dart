@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_application/model/connect_model.dart';
+part of '../main.dart';
 
 // This is the originalConnect view screen
 class ConnectView extends StatelessWidget {

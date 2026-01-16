@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'history_view.dart';
-import 'connect_view.dart';
-import 'during_swim_view.dart';
-import 'package:flutter_application/model/during_swim_model.dart';
-
+part of '../main.dart';
 // This is the Home view screen
 
 class HomePage extends StatelessWidget {

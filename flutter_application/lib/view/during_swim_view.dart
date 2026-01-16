@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../main.dart';
 
 class DuringSwimView extends StatefulWidget {
   const DuringSwimView({super.key});

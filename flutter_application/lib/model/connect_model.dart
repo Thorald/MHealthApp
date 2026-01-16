@@ -1,7 +1,4 @@
-// establish connection
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:movesense_plus/movesense_plus.dart';
+part of '../main.dart';
 
 class MovesenseDeviceConnected extends ChangeNotifier {
   final MovesenseDevice device = MovesenseDevice(
