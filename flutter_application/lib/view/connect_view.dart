@@ -30,7 +30,7 @@ class ConnectViewCenter extends StatefulWidget {
 }
 
 class _ConnectViewCenterState extends State<ConnectViewCenter> {
-  final MovesenseDeviceConnected vm = MovesenseDeviceConnected();
+  final MovesenseDeviceManager vm = MovesenseDeviceManager();
 
   @override
   Widget build(BuildContext context) {

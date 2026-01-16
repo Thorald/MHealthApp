@@ -11,12 +11,14 @@ part 'view/during_swim_view.dart';
 
 part 'view_model/connect_view_model.dart';
 
-part 'model/connect_model.dart';
+part 'model/movesense_device_manager.dart';
 part 'model/during_swim_model.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+late final MovesenseDeviceManager movesenseDeviceManager;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
