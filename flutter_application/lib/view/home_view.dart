@@ -1,11 +1,13 @@
-part of '../main.dart';
+import 'package:flutter/material.dart';
+import 'history_view.dart';
+import 'connect_view.dart';
+import 'during_swim_view.dart';
+import 'package:flutter_application/model/during_swim_model.dart';
+
 // This is the Home view screen
 
 class HomePage extends StatelessWidget {
-  final HomeViewModel model;
-  const HomePage({super.key, this.model});
-
-  DuringSwimView swimView = DuringSwimView(viewModel: model.swimViewModel,);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class HomePage extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => ),
+          MaterialPageRoute(builder: (_) => DuringSwimView()),
         );
       },
       child: const Text('Start Swim'),
