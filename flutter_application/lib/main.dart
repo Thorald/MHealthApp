@@ -9,7 +9,7 @@ part 'view/connect_view.dart';
 part 'view/history_view.dart';
 part 'view/during_swim_view.dart';
 
-part 'view_model/connect_view_model.dart';
+part 'view_model/connect_viewmodel.dart';
 
 part 'model/movesense_device_manager.dart';
 part 'model/during_swim_model.dart';
