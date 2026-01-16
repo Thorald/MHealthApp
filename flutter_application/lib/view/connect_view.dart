@@ -1,10 +1,9 @@
-part of '../main.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_application/model/connect_model.dart';
 
 // This is the originalConnect view screen
 class ConnectView extends StatelessWidget {
-  final ConnectViewModel model;
-
-  const ConnectView({super.key, required this.model});
+  const ConnectView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class ConnectViewCenter extends StatefulWidget {
 }
 
 class _ConnectViewCenterState extends State<ConnectViewCenter> {
-  // final MovesenseDeviceConnected model = MovesenseDeviceConnected();
+  final MovesenseDeviceConnected vm = MovesenseDeviceConnected();
 
   @override
   Widget build(BuildContext context) {
