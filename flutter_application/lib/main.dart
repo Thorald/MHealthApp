@@ -16,8 +16,16 @@ part 'view_model/duringswim_viewmodel.dart';
 part 'model/movesense_device_manager.dart';
 part 'model/during_swim_model.dart';
 
-//Block
-final MovesenseDeviceManager movesenseDeviceManager = MovesenseDeviceManager();
+// -----------BLOCK-----------
+
+class Block {
+  final MovesenseDeviceManager movesenseDeviceManager =
+      MovesenseDeviceManager();
+}
+
+final block = Block();
+
+// ------------MAIN------------
 
 void main() {
   runApp(const MyApp());
