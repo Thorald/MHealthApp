@@ -16,7 +16,9 @@ part 'view_model/duringswim_viewmodel.dart';
 part 'model/movesense_device_manager.dart';
 part 'model/bathingevent.dart';
 
-// -----------BLOCK-----------
+// ============================================================
+//                          BLOCK
+// ============================================================
 
 class Block {
   final MovesenseDeviceManager movesenseDeviceManager =
@@ -25,7 +27,9 @@ class Block {
 
 final block = Block();
 
-// ------------MAIN------------
+// ============================================================
+//                           MAIN
+// ============================================================
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

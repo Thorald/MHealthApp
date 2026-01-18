@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/model/MDSFiles/DeviceModel.dart';
+import 'package:flutter_application/model/TestFiles/DeviceModel.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_application/model/MDSFiles/Device.dart';
+import 'package:flutter_application/model/TestFiles/Device.dart';
 
 import 'AppModel.dart';
 

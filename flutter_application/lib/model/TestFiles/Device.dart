@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_application/model/MDSFiles/DeviceConnectionStatus.dart';
+import 'package:flutter_application/model/TestFiles/DeviceConnectionStatus.dart';
 
 class Device {
   String? _address;

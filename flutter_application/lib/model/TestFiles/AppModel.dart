@@ -2,9 +2,9 @@ import 'dart:collection';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_application/model/MDSFiles/Device.dart';
+import 'package:flutter_application/model/TestFiles/Device.dart';
 import 'package:mdsflutter/Mds.dart';
-import 'package:flutter_application/model/MDSFiles/DeviceConnectionStatus.dart';
+import 'package:flutter_application/model/TestFiles/DeviceConnectionStatus.dart';
 
 class AppModel extends ChangeNotifier {
   final Set<Device> _deviceList = Set();
