@@ -29,7 +29,6 @@ The app consists of the following main views:
    - Transitions to "During Swim View"
    - A new BathingEvent is instantiated with the current time
 
-
 3. During Swim View
    - Live heart rate is shown using a stream
    - User presses STOP

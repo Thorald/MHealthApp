@@ -70,6 +70,23 @@ class _DuringSwimViewState extends State<DuringSwimView> {
                   );
                 },
               ),
+              StreamBuilder<int>(
+                stream: widget.viewModel.elapsedSeconds,
+                builder: (context, snapshot) {
+                  final seconds = snapshot.data ?? 0;
+                  final minutes = seconds ~/ 60;
+                  final remainingSeconds = seconds % 60;
+
+                  return Text(
+                    'Time: ${minutes.toString().padLeft(2, '0')}:'
+                    '${remainingSeconds.toString().padLeft(2, '0')}',
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
