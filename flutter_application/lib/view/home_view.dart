@@ -15,6 +15,10 @@ class HomePage extends StatelessWidget {
 
   Center homePageBody(context) => Center(
     child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.lightGreen,
+        padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 24),
+      ),
       onPressed: () {
         final duringswimViewModel = DuringswimViewModel();
         Navigator.push(
@@ -24,7 +28,10 @@ class HomePage extends StatelessWidget {
           ),
         );
       },
-      child: const Text('Start Swim'),
+      child: const Text(
+        'START',
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
     ),
   );
 
