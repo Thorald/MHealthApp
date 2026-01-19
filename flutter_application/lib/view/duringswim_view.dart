@@ -13,14 +13,12 @@ class _DuringSwimViewState extends State<DuringSwimView> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: hasStopped,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Swimming'),
-          automaticallyImplyLeading: false,
-        ),
-        body: Center(          
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Swimming'),
+        automaticallyImplyLeading: false,
+      ),
+      body: Center(          
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -100,28 +98,30 @@ class _DuringSwimViewState extends State<DuringSwimView> {
           color: Color(0xFFF2F2F2),
           border: Border(top: BorderSide(color: Color(0xFFF2F2F2))),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [            
-            InkWell(
-              onTap: () => Navigator.pop(context),
-              child: const Row(
-                children: [
-                  Icon(Icons.arrow_back, size: 32),
-                  SizedBox(width: 8),
-                  Text('Back', style: TextStyle(fontSize: 18)),
-                ],
-              ),
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: InkWell(
+            onTap: hasStopped ? () => Navigator.pop(context) : null,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.arrow_back,
+                  size: 32,
+                  color: hasStopped ? Colors.black : Colors.grey,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'Back',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: hasStopped ? Colors.black : Colors.grey,
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
-
-        floatingActionButton: FloatingActionButton(
-          onPressed: hasStopped ? () => Navigator.pop(context) : null,
-          backgroundColor: hasStopped ? null : Colors.grey,
-          child: const Icon(Icons.arrow_back),
-        )
       ),
     );
   }
