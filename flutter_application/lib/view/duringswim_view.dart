@@ -11,66 +11,98 @@ class DuringSwimView extends StatefulWidget {
 class _DuringSwimViewState extends State<DuringSwimView> {
   bool hasStopped = false;
 
+  AppBar myAppBar() => AppBar(
+        automaticallyImplyLeading: false,
+        toolbarHeight: 200,
+        centerTitle: true,
+        title: const Padding(
+          padding: EdgeInsets.only(top: 150),
+          child: Text(
+            "Swimming...",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Swimming'),
-        automaticallyImplyLeading: false,
-      ),
-      body: Center(          
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // STOP BUTTON
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 48,
-                    vertical: 24,
-                  ),
-                ),
-                onPressed: hasStopped
-                    ? null
-                    : () async {
-                        setState(() {
-                          hasStopped = true;
-                        });
-
-                        await widget.viewModel.stopAndSave();
-                      },
-                child: const Text(
-                  'STOP',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-
-              const SizedBox(height: 24),
-
-              // HEART RATE DISPLAY
-              StreamBuilder<int>(
-                stream: widget.viewModel.pulse,
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Text(
-                      'Pulse: --',
-                      style: TextStyle(fontSize: 18),
-                    );
-                  }
-
-                  return Text(
-                    'Pulse: ${snapshot.data} bpm',
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+      appBar: myAppBar(),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: hasStopped
+                          ? null
+                          : () async {
+                              setState(() => hasStopped = true);
+                              await widget.viewModel.stopAndSave();
+                            },
+                      customBorder: const CircleBorder(),
+                      child: Container(
+                        width: 90,
+                        height: 90,
+                        decoration: BoxDecoration(
+                          color: hasStopped
+                              ? Colors.grey
+                              : const Color(0xFFD84A3A),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.stop_rounded,
+                          color: Colors.white,
+                          size: 44,
+                        ),
+                      ),
                     ),
-                  );
-                },
+                    const SizedBox(width: 24),
+                    Text(
+                      'STOP',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w400,
+                        color: hasStopped ? Colors.grey : Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ),
 
-              // TIME ELAPSED DISPLAY
-              StreamBuilder<int>(
+// HR and duration (bottom-left)
+Align(
+  alignment: Alignment.bottomLeft,
+  child: Padding(
+    padding: const EdgeInsets.only(left: 24, bottom: 130), // adjust vertical position
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // DURATION ROW
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.water_drop_rounded,
+              size: 44,
+              color: Colors.blueAccent.shade100,
+            ),
+            const SizedBox(width: 14),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF2F2F2),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: StreamBuilder<int>(
                 stream: widget.viewModel.elapsedSeconds,
                 builder: (context, snapshot) {
                   final seconds = snapshot.data ?? 0;
@@ -78,20 +110,61 @@ class _DuringSwimViewState extends State<DuringSwimView> {
                   final remainingSeconds = seconds % 60;
 
                   return Text(
-                    'Time: ${minutes.toString().padLeft(2, '0')}:'
+                    'Swim time: ${minutes.toString().padLeft(2, '0')}:'
                     '${remainingSeconds.toString().padLeft(2, '0')}',
                     style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w500,
                     ),
                   );
                 },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
 
-        bottomNavigationBar: Container(
+        const SizedBox(height: 18),
+
+        // HR ROW
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.favorite_sharp,
+              size: 44,
+              color: Color.fromARGB(255, 184, 0, 28),
+            ),
+            const SizedBox(width: 14),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF2F2F2),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: StreamBuilder<int>(
+                stream: widget.viewModel.pulse,
+                builder: (context, snapshot) {
+                  final pulse = snapshot.data;
+                  return Text(
+                    pulse == null ? 'Pulse: -- BPM' : 'Pulse: $pulse BPM',
+                    style: const TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ),
+),
+          ],
+        ),
+      ),  
+      bottomNavigationBar: Container(
         height: 100,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: const BoxDecoration(

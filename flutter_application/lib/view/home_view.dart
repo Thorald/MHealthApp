@@ -12,18 +12,32 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  AppBar myAppBar() => AppBar(title: Center(child: 
-  Text("home")));
+      AppBar myAppBar() => AppBar(
+      toolbarHeight: 170,
+        title: Center(child:
+        Padding(
+        padding: const EdgeInsets.only(top: 130),
+        child: Center(
+          child: Text(
+            "Let's go for a swim!",
+            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    ),
+  );
+
 
   Center homePageBody(BuildContext context) => Center(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
           IconButton.filled(
             icon: const Icon(Icons.play_arrow_rounded, size: 40),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-              backgroundColor: Colors.green,
+              backgroundColor: const Color.fromARGB(255, 65, 215, 70),
             ),
             onPressed: () {
               final duringswimViewModel = DuringswimViewModel();
@@ -35,9 +49,10 @@ class HomePage extends StatelessWidget {
             );
           },
           ),
+          const SizedBox(width: 35),
           const Text(
         'START',
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
         ),
       ],
     ),
@@ -57,7 +72,7 @@ class HomePage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.list),
             padding: const EdgeInsets.all(20),
-            iconSize: 40,
+            iconSize: 50,
             onPressed: () {
               Navigator.push(
                 context,
@@ -68,7 +83,7 @@ class HomePage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.bluetooth),
             padding: const EdgeInsets.all(20),
-            iconSize: 40,
+            iconSize: 50,
             onPressed: () {
               final connectViewModel = ConnectViewModel();
               block.movesenseDeviceManager.addListener(
