@@ -4,6 +4,9 @@ class BathingEvent {
   final DateTime eventTimeStarted;
   DateTime? eventTimeEnded;
 
+  double? latitude;
+  double? longitude;
+
   BathingEvent() : eventTimeStarted = DateTime.now();
 
   Duration? get duration {
@@ -15,6 +18,8 @@ class BathingEvent {
     return {
       'eventTimeStarted': eventTimeStarted.toUtc().toIso8601String(),
       'eventTimeEnded': eventTimeEnded?.toUtc().toIso8601String(),
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 }

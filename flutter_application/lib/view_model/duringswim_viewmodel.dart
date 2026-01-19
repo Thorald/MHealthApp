@@ -30,9 +30,27 @@ class DuringswimViewModel {
   Future<void> stopAndSave() async {
     _timer?.cancel();
 
+    // Mark swim end
     bathingEvent.eventTimeEnded = DateTime.now();
 
+    try {
+      // Attempt to get current position
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
+      );
+
+      bathingEvent.latitude = position.latitude;
+      debugPrint(position.latitude.toString());
+      bathingEvent.longitude = position.longitude;
+    } catch (e) {
+      // Location unavailable or permission denied
+      debugPrint('>> Location not available: $e');
+    }
+
     await bathingEventStore.add(block.database, bathingEvent.toMap());
+
     debugPrint(">> sent to database");
   }
 

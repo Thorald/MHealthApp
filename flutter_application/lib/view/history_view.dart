@@ -12,10 +12,17 @@ class HistoryView extends StatelessWidget {
 
       final start = DateTime.parse(startIso).toLocal();
       final end = endIso != null ? DateTime.parse(endIso).toLocal() : null;
+      final duration = end?.difference(start);
 
-      final duration = end != null ? end.difference(start) : null;
+      final latitude = record.value['latitude'] as double?;
+      final longitude = record.value['longitude'] as double?;
 
-      return _BathingEventViewData(startTime: start, duration: duration);
+      return _BathingEventViewData(
+        startTime: start,
+        duration: duration,
+        latitude: latitude,
+        longitude: longitude,
+      );
     }).toList();
   }
 
@@ -47,6 +54,13 @@ class HistoryView extends StatelessWidget {
                   : '${event.duration!.inMinutes.toString().padLeft(2, '0')}:'
                         '${(event.duration!.inSeconds % 60).toString().padLeft(2, '0')}';
 
+              final locationText =
+                  (event.latitude != null && event.longitude != null)
+                  ? ' • Location '
+                        '${event.latitude!.toStringAsFixed(5)}, '
+                        '${event.longitude!.toStringAsFixed(5)}'
+                  : '';
+
               return ListTile(
                 leading: const Icon(Icons.pool),
                 title: Text(
@@ -55,7 +69,8 @@ class HistoryView extends StatelessWidget {
                 subtitle: Text(
                   '${dateTime.hour.toString().padLeft(2, '0')}:'
                   '${dateTime.minute.toString().padLeft(2, '0')}'
-                  '  •  Duration $durationText',
+                  ' • Duration $durationText'
+                  '$locationText',
                 ),
               );
             },
@@ -92,8 +107,15 @@ class HistoryView extends StatelessWidget {
 class _BathingEventViewData {
   final DateTime startTime;
   final Duration? duration;
+  final double? latitude;
+  final double? longitude;
 
-  _BathingEventViewData({required this.startTime, required this.duration});
+  _BathingEventViewData({
+    required this.startTime,
+    required this.duration,
+    this.latitude,
+    this.longitude,
+  });
 }
 
 // class HistoryView extends StatelessWidget {

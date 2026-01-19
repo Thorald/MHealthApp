@@ -9,8 +9,11 @@
 	<string>Used to connect to Movesense devices</string>
 	<key>UIBackgroundModes</key>
 	<array>
-  	<string>bluetooth-central</string>
+	<string>bluetooth-central</string>
 	</array>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app uses your location to record where a swim took place.</string>
 
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
