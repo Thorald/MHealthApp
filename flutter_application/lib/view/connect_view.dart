@@ -13,10 +13,28 @@ class ConnectView extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: ConnectViewCenter(viewModel: viewModel),
-      floatingActionButton: FloatingActionButton(
-        heroTag: "backbutton",
-        onPressed: () => Navigator.pop(context),
-        child: const Icon(Icons.arrow_back),
+      bottomNavigationBar: Container(
+        height: 80,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: const BoxDecoration(
+          color: Color(0xFFF2F2F2),
+          border: Border(top: BorderSide(color: Color(0xFFF2F2F2))),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [            
+            InkWell(
+              onTap: () => Navigator.pop(context),
+              child: const Row(
+                children: [
+                  Icon(Icons.arrow_back, size: 32),
+                  SizedBox(width: 8),
+                  Text('Back', style: TextStyle(fontSize: 18)),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
