@@ -36,21 +36,26 @@ class HomePage extends StatelessWidget {
 
   Widget bottomContainer(BuildContext context) {
     return Container(
-      height: 100,
+      height: 80,
       padding: const EdgeInsets.all(12),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ElevatedButton(
+          IconButton(
+            icon: const Icon(Icons.history),
+            padding: const EdgeInsets.all(20),
+            iconSize: 40,
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const HistoryView()),
               );
             },
-            child: const Text('History'),
           ),
-          ElevatedButton(
+          IconButton(
+            icon: const Icon(Icons.bluetooth),
+            padding: const EdgeInsets.all(20),
+            iconSize: 40,
             onPressed: () {
               final connectViewModel = ConnectViewModel();
               block.movesenseDeviceManager.addListener(
@@ -63,7 +68,6 @@ class HomePage extends StatelessWidget {
                 ),
               );
             },
-            child: const Text('Connect'),
           ),
         ],
       ),
