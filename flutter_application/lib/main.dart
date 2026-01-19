@@ -30,6 +30,7 @@ class Block {
   late final Database database;
 }
 
+// Create Singleton
 final block = Block();
 
 // ============================================================
