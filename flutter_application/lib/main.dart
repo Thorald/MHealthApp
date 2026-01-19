@@ -79,6 +79,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Viking app', home: const HomePage());
+    return MaterialApp(
+      theme: ThemeData(fontFamily: 'MyFont'),
+      title: 'Viking app',
+      home: const HomePage(),
+    );
   }
 }
