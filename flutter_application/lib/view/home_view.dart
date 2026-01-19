@@ -43,47 +43,47 @@ class HomePage extends StatelessWidget {
     ),
   );
 
-Widget bottomContainer(BuildContext context) {
-  return Container(
-    height: 100,
-    padding: const EdgeInsets.symmetric(horizontal: 20),
-    decoration: const BoxDecoration(
-      color: Color(0xFFF2F2F2),
-      border: Border(top: BorderSide(color: Color(0xFFF2F2F2))),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.list),
-          padding: const EdgeInsets.all(20),
-          iconSize: 40,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const HistoryView()),
-            );
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.bluetooth),
-          padding: const EdgeInsets.all(20),
-          iconSize: 40,
-          onPressed: () {
-            final connectViewModel = ConnectViewModel();
-            block.movesenseDeviceManager.addListener(
-              connectViewModel.onDeviceChanged,
-            );
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => ConnectView(viewModel: connectViewModel),
-              ),
-            );
-          },
-        ),
-      ],
-    ),
-  );
-}
+  Widget bottomContainer(BuildContext context) {
+    return Container(
+      height: 100,
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: const BoxDecoration(
+        color: Color(0xFFF2F2F2),
+        border: Border(top: BorderSide(color: Color(0xFFF2F2F2))),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.list),
+            padding: const EdgeInsets.all(20),
+            iconSize: 40,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const HistoryView()),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.bluetooth),
+            padding: const EdgeInsets.all(20),
+            iconSize: 40,
+            onPressed: () {
+              final connectViewModel = ConnectViewModel();
+              block.movesenseDeviceManager.addListener(
+                connectViewModel.onDeviceChanged,
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ConnectView(viewModel: connectViewModel),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
