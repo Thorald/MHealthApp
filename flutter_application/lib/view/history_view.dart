@@ -29,7 +29,7 @@ class HistoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('History')),
+      appBar: AppBar(title: const Text('Previous Swims')),
       body: FutureBuilder<List<_BathingEventViewData>>(
         future: _loadBathingEvents(),
         builder: (context, snapshot) {
