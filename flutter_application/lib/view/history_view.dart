@@ -49,7 +49,7 @@ class HistoryView extends StatelessWidget {
         },
       ),
       bottomNavigationBar: Container(
-        height: 80,
+        height: 100,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: const BoxDecoration(
           color: Color(0xFFF2F2F2),

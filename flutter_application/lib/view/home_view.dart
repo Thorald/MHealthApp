@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
 
   Widget bottomContainer(BuildContext context) {
     return Container(
-      height: 80,
+      height: 100,
       padding: const EdgeInsets.all(12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
