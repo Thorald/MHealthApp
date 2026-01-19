@@ -3,12 +3,19 @@ part of '../main.dart';
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
 
-  Future<List<DateTime>> _loadBathingEvents() async {
+  Future<List<_BathingEventViewData>> _loadBathingEvents() async {
     final records = await bathingEventStore.find(block.database);
 
     return records.map((record) {
-      final isoString = record.value['eventTimeStarted'] as String;
-      return DateTime.parse(isoString).toLocal();
+      final startIso = record.value['eventTimeStarted'] as String;
+      final endIso = record.value['eventTimeEnded'] as String?;
+
+      final start = DateTime.parse(startIso).toLocal();
+      final end = endIso != null ? DateTime.parse(endIso).toLocal() : null;
+
+      final duration = end != null ? end.difference(start) : null;
+
+      return _BathingEventViewData(startTime: start, duration: duration);
     }).toList();
   }
 
@@ -16,7 +23,7 @@ class HistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('History')),
-      body: FutureBuilder<List<DateTime>>(
+      body: FutureBuilder<List<_BathingEventViewData>>(
         future: _loadBathingEvents(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -32,7 +39,13 @@ class HistoryView extends StatelessWidget {
           return ListView.builder(
             itemCount: events.length,
             itemBuilder: (context, index) {
-              final dateTime = events[index];
+              final event = events[index];
+              final dateTime = event.startTime;
+
+              final durationText = event.duration == null
+                  ? '--:--'
+                  : '${event.duration!.inMinutes.toString().padLeft(2, '0')}:'
+                        '${(event.duration!.inSeconds % 60).toString().padLeft(2, '0')}';
 
               return ListTile(
                 leading: const Icon(Icons.pool),
@@ -41,7 +54,8 @@ class HistoryView extends StatelessWidget {
                 ),
                 subtitle: Text(
                   '${dateTime.hour.toString().padLeft(2, '0')}:'
-                  '${dateTime.minute.toString().padLeft(2, '0')}',
+                  '${dateTime.minute.toString().padLeft(2, '0')}'
+                  '  •  Duration $durationText',
                 ),
               );
             },
@@ -57,7 +71,7 @@ class HistoryView extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [            
+          children: [
             InkWell(
               onTap: () => Navigator.pop(context),
               child: const Row(
@@ -73,6 +87,13 @@ class HistoryView extends StatelessWidget {
       ),
     );
   }
+}
+
+class _BathingEventViewData {
+  final DateTime startTime;
+  final Duration? duration;
+
+  _BathingEventViewData({required this.startTime, required this.duration});
 }
 
 // class HistoryView extends StatelessWidget {
