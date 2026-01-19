@@ -29,8 +29,11 @@ class DuringswimViewModel {
 
   Future<void> stopAndSave() async {
     _timer?.cancel();
+
+    bathingEvent.eventTimeEnded = DateTime.now();
+
     await bathingEventStore.add(block.database, bathingEvent.toMap());
-    debugPrint(">> Saved to database");
+    debugPrint(">> sent to database");
   }
 
   void dispose() {
