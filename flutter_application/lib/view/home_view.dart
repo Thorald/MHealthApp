@@ -6,31 +6,40 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      appBar: myAppBar(),
       body: homePageBody(context),
       bottomNavigationBar: bottomContainer(context),
     );
   }
 
-  Center homePageBody(context) => Center(
-    child: ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.lightGreen,
-        padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 24),
-      ),
-      onPressed: () {
-        final duringswimViewModel = DuringswimViewModel();
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => DuringSwimView(viewModel: duringswimViewModel),
+  AppBar myAppBar() => AppBar(title: Center(child: 
+  Text("home")));
+
+  Center homePageBody(BuildContext context) => Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+          IconButton.filled(
+            icon: const Icon(Icons.play_arrow_rounded, size: 40),
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              backgroundColor: Colors.green,
+            ),
+            onPressed: () {
+              final duringswimViewModel = DuringswimViewModel();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DuringSwimView(viewModel: duringswimViewModel),
+              ),
+            );
+          },
           ),
-        );
-      },
-      child: const Text(
+          const Text(
         'START',
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      ),
+        ),
+      ],
     ),
   );
 
