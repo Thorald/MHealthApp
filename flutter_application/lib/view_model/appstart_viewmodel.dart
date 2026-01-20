@@ -17,7 +17,7 @@ class AppStartViewModel extends ChangeNotifier {
     connectViewModel.onDeviceChanged();
 
     // Replace with your real startup work
-    await Future.delayed(const Duration(seconds: 10));
+    await Future.delayed(const Duration(seconds: 1));
 
     _isReady = true;
     notifyListeners();
