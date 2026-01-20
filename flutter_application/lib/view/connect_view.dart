@@ -26,7 +26,7 @@ class ConnectView extends StatelessWidget {
         height: 100,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: const BoxDecoration(
-          color: Color(0xFFF2F2F2),
+          color: Color.fromARGB(255, 242, 242, 242),
           border: Border(top: BorderSide(color: Color(0xFFF2F2F2))),
         ),
         child: Row(
@@ -66,10 +66,11 @@ class ConnectViewCenter extends StatelessWidget {
     return Icons.bluetooth;
   }
 
-  Color _statusColor(ConnectViewModel vm) {
-    if (vm.isConnected) return Colors.blue;
-    if (vm.isConnecting) return Colors.orange;
-    return Colors.grey;
+  // ONLY background color changes
+  Color _statusBgColor(ConnectViewModel vm) {
+    if (vm.isConnected) return const Color.fromARGB(255, 72, 246, 89);
+    if (vm.isConnecting) return const Color.fromARGB(255, 255, 255, 0);
+    return const Color.fromARGB(255, 172, 210, 217);
   }
 
   @override
@@ -85,7 +86,10 @@ class ConnectViewCenter extends StatelessWidget {
                 icon: Icon(_statusIcon(viewModel)),
                 padding: const EdgeInsets.all(20),
                 iconSize: 100,
-                color: _statusColor(viewModel),
+                style: IconButton.styleFrom(
+                  backgroundColor: _statusBgColor(viewModel),
+                  foregroundColor: Colors.black
+                ),
                 onPressed: viewModel.isConnecting ? null : viewModel.connect,
               ),
               const SizedBox(height: 20),
