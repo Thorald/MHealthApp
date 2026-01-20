@@ -55,8 +55,8 @@ class ConnectViewCenter extends StatelessWidget {
   const ConnectViewCenter({super.key, required this.viewModel});
 
   String _statusText(ConnectViewModel vm) {
-    if (vm.isConnected) return 'Connected';
-    if (vm.isConnecting) return 'Connecting';
+    if (vm.isConnected) return 'Connected - Ready to Swim!';
+    if (vm.isConnecting) return 'Connecting...';
     return 'Press to Connect';
   }
 
@@ -68,7 +68,7 @@ class ConnectViewCenter extends StatelessWidget {
 
   // ONLY background color changes
   Color _statusBgColor(ConnectViewModel vm) {
-    if (vm.isConnected) return const Color.fromARGB(255, 72, 246, 89);
+    if (vm.isConnected) return const Color.fromARGB(255, 65, 215, 70);
     if (vm.isConnecting) return const Color.fromARGB(255, 255, 255, 0);
     return const Color.fromARGB(255, 172, 210, 217);
   }
@@ -88,7 +88,7 @@ class ConnectViewCenter extends StatelessWidget {
                 iconSize: 100,
                 style: IconButton.styleFrom(
                   backgroundColor: _statusBgColor(viewModel),
-                  foregroundColor: Colors.black
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255)
                 ),
                 onPressed: viewModel.isConnecting ? null : viewModel.connect,
               ),
