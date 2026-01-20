@@ -7,6 +7,8 @@ class DuringswimViewModel {
 
   late final Stream<int> _elapsedSeconds;
   late final StreamController<int> _elapsedController;
+  StreamSubscription<int>? _pulseSubscription;
+
   Timer? _timer;
 
   DuringswimViewModel() : bathingEvent = BathingEvent() {
@@ -20,6 +22,13 @@ class DuringswimViewModel {
     });
 
     _elapsedSeconds = _elapsedController.stream;
+
+    // Subscribe once to heart rate stream
+    _pulseSubscription = block.movesenseDeviceManager.device.hr
+        .map((hr) => hr.average)
+        .listen((pulse) {
+          bathingEvent.pulses.add(pulse);
+        });
   }
 
   Stream<int> get elapsedSeconds => _elapsedSeconds;
@@ -29,27 +38,23 @@ class DuringswimViewModel {
 
   Future<void> stopAndSave() async {
     _timer?.cancel();
+    _pulseSubscription?.cancel();
 
-    // Mark swim end
     bathingEvent.eventTimeEnded = DateTime.now();
 
     try {
-      // Attempt to get current position
       final position = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.high,
         ),
       );
-
       bathingEvent.latitude = position.latitude;
       bathingEvent.longitude = position.longitude;
     } catch (e) {
-      // Location unavailable or permission denied
       debugPrint('>> Location not available: $e');
     }
 
     await bathingEventStore.add(block.database, bathingEvent.toMap());
-
     debugPrint(">> sent to database");
   }
 

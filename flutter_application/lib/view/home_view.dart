@@ -22,53 +22,55 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    block.movesenseDeviceManager.removeListener(connectViewModel.onDeviceChanged);
+    block.movesenseDeviceManager.removeListener(
+      connectViewModel.onDeviceChanged,
+    );
     connectViewModel.dispose();
     super.dispose();
   }
 
   AppBar myAppBar() => AppBar(
-        toolbarHeight: 170,
-        centerTitle: true,
-        title: const Padding(
-          padding: EdgeInsets.only(top: 130),
-          child: Text(
-            "Let's go for a swim!",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      );
+    toolbarHeight: 170,
+    centerTitle: true,
+    title: const Padding(
+      padding: EdgeInsets.only(top: 130),
+      child: Text(
+        "Let's go for a swim!",
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+        textAlign: TextAlign.center,
+      ),
+    ),
+  );
 
   Center homePageBody(BuildContext context) => Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton.filled(
-              icon: const Icon(Icons.play_arrow_rounded, size: 40),
-              style: IconButton.styleFrom(
-                padding: const EdgeInsets.all(24),
-                backgroundColor: const Color.fromARGB(255, 65, 215, 70),
-                foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton.filled(
+          icon: const Icon(Icons.play_arrow_rounded, size: 40),
+          style: IconButton.styleFrom(
+            padding: const EdgeInsets.all(24),
+            backgroundColor: const Color.fromARGB(255, 65, 215, 70),
+            foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+          ),
+          onPressed: () {
+            final duringswimViewModel = DuringswimViewModel();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => DuringSwimView(viewModel: duringswimViewModel),
               ),
-              onPressed: () {
-                final duringswimViewModel = DuringswimViewModel();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => DuringSwimView(viewModel: duringswimViewModel),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(width: 35),
-            const Text(
-              'START',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
-            ),
-          ],
+            );
+          },
         ),
-      );
+        const SizedBox(width: 35),
+        const Text(
+          'START',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
+        ),
+      ],
+    ),
+  );
 
   Widget bottomContainer(BuildContext context) {
     return Container(
@@ -174,9 +176,7 @@ class _ConnectionBadge extends StatelessWidget {
         shape: BoxShape.circle,
         border: Border.all(color: const Color(0xFFF2F2F2), width: 2),
       ),
-      child: Center(
-        child: Icon(icon, size: 12, color: Colors.white),
-      ),
+      child: Center(child: Icon(icon, size: 12, color: Colors.white)),
     );
   }
 }
