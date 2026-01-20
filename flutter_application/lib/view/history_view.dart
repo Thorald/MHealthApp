@@ -39,14 +39,13 @@ class SwimHistoryTile extends StatelessWidget {
         key: PageStorageKey(dt.toIso8601String()),
         leading: const Icon(Icons.pool),
         title: Text(dateText),
-        subtitle: Text(subtitle),
+        subtitle: Text("Time: $timeText"),
         childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         children: [
           _InfoRow(label: 'Time', value: timeText),
           _InfoRow(label: 'Duration', value: durationText),
           _InfoRow(label: 'Average HR', value: avgHrText),
-          _InfoRow(label: 'Latitude', value: latText),
-          _InfoRow(label: 'Longitude', value: lonText),
+          _InfoRow(label: 'Location', value: latText),
         ],
       ),
     );
@@ -70,7 +69,7 @@ class _InfoRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 110,
+            width: 200,
             child: Text(
               label,
               style: const TextStyle(fontWeight: FontWeight.w600),
