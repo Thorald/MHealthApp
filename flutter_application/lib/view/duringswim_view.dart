@@ -15,15 +15,15 @@ class _DuringSwimViewState extends State<DuringSwimView> {
         automaticallyImplyLeading: false,
         toolbarHeight: 200,
         centerTitle: true,
-        title: const Padding(
-          padding: EdgeInsets.only(top: 150),
-          child: Text(
-            "Swimming...",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-            textAlign: TextAlign.center,
-          ),
+      title:  Padding(
+        padding: EdgeInsets.only(top: 150),
+        child: Text(
+          hasStopped ? "Swim ended" : "Swimming...",
+          style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+          textAlign: TextAlign.center,
         ),
-      );
+      ),
+    );
 
   @override
   Widget build(BuildContext context) {
@@ -36,44 +36,55 @@ class _DuringSwimViewState extends State<DuringSwimView> {
               alignment: Alignment.topCenter,
               child: Padding(
                 padding: const EdgeInsets.only(top: 100),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                      onTap: hasStopped
-                          ? null
-                          : () async {
+                child: hasStopped
+                    ? Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Icon(Icons.check_circle, size: 44, color: Color(0xFF4CAF50)),
+                          SizedBox(width: 14),
+                          Text(
+                            'saved to "Previous Swims"',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ):Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          InkWell(
+                            onTap: () async {
                               setState(() => hasStopped = true);
                               await widget.viewModel.stopAndSave();
                             },
-                      customBorder: const CircleBorder(),
-                      child: Container(
-                        width: 90,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: hasStopped
-                              ? Colors.grey
-                              : const Color(0xFFD84A3A),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.stop_rounded,
-                          color: Colors.white,
-                          size: 44,
-                        ),
+                            customBorder: const CircleBorder(),
+                            child: Container(
+                              width: 90,
+                              height: 90,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFD84A3A),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.stop_rounded,
+                                color: Colors.white,
+                                size: 44,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 24),
+                          const Text(
+                            'STOP',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(width: 24),
-                    Text(
-                      'STOP',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w400,
-                        color: hasStopped ? Colors.grey : Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ),
 
