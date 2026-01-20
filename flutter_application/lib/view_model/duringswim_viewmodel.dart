@@ -56,36 +56,14 @@ class DuringswimViewModel {
 
     // Save to database
     await bathingEventStore.add(block.database, bathingEvent.toJson());
-    debugPrint(">> sent to database");
+    debugPrint('>> sent to database');
 
-    // Dump raw heart rate data
-    await dumpBathingEventToFile();
+    // Dump JSON file
+    await DumpManager.dumpBathingEvent(bathingEvent);
   }
-
-  Future<void> dumpBathingEventToFile() =>
-      _dumpBathingEventToFile(bathingEvent);
 
   void dispose() {
     _timer?.cancel();
     _elapsedController.close();
-  }
-
-  Future<void> _dumpBathingEventToFile(BathingEvent event) async {
-    final dir = await getApplicationDocumentsDirectory();
-
-    final fileName =
-        'bathing_event_${event.eventTimeStarted.toIso8601String()}.json'
-            .replaceAll(':', '-'); // iOS-safe filename
-
-    final filePath = join(dir.path, fileName);
-
-    final jsonString = const JsonEncoder.withIndent(
-      '  ',
-    ).convert(event.toJson());
-
-    final file = File(filePath);
-    await file.writeAsString(jsonString);
-
-    debugPrint('>> BathingEvent dumped to $filePath');
   }
 }
