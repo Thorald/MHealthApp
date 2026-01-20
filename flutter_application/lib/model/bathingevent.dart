@@ -21,7 +21,7 @@ class BathingEvent {
     return pulses.reduce((a, b) => a + b) / pulses.length;
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'eventTimeStarted': eventTimeStarted.toUtc().toIso8601String(),
       'eventTimeEnded': eventTimeEnded?.toUtc().toIso8601String(),
