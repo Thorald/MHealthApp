@@ -42,7 +42,6 @@ class DuringswimViewModel {
       );
 
       bathingEvent.latitude = position.latitude;
-      debugPrint(position.latitude.toString());
       bathingEvent.longitude = position.longitude;
     } catch (e) {
       // Location unavailable or permission denied
