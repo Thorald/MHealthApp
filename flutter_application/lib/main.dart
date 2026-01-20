@@ -16,16 +16,11 @@ part 'view/history_view.dart';
 part 'view/duringswim_view.dart';
 
 part 'view_model/connect_viewmodel.dart';
+part 'view_model/home_viewmodel.dart';
 part 'view_model/duringswim_viewmodel.dart';
 
 part 'model/movesense_device_manager.dart';
 part 'model/bathingevent.dart';
-part 'model/dump_manager.dart';
-
-part 'view/appstart_view.dart';
-part 'view_model/appstart_viewmodel.dart';
-
-// plus whatever you already have…
 
 // ============================================================
 //                          BLOCK
@@ -74,7 +69,7 @@ void main() async {
   final dbPath = join(appDir.path, 'viking_app.db');
 
   //Uncomment here to reset database:
-  //await databaseFactoryIo.deleteDatabase(dbPath);
+  await databaseFactoryIo.deleteDatabase(dbPath);
 
   block.database = await databaseFactoryIo.openDatabase(dbPath);
 
@@ -89,7 +84,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'MyFont'),
       title: 'Viking app',
-      home: AppStartView(viewModel: AppStartViewModel()),
+      home: const HomePage(),
     );
   }
 }

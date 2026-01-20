@@ -1,8 +1,7 @@
 part of '../main.dart';
 
 class HomePage extends StatefulWidget {
-  final ConnectViewModel connectViewModel;
-  const HomePage({super.key, required this.connectViewModel});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
