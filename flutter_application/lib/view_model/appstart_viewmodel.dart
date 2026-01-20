@@ -25,7 +25,9 @@ class AppStartViewModel extends ChangeNotifier {
 
   @override
   void dispose() {
-    block.movesenseDeviceManager.removeListener(connectViewModel.onDeviceChanged);
+    block.movesenseDeviceManager.removeListener(
+      connectViewModel.onDeviceChanged,
+    );
     connectViewModel.dispose();
     super.dispose();
   }
