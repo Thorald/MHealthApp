@@ -15,6 +15,10 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app uses your location to record where a swim took place.</string>
 
+
+	<key>UIFileSharingEnabled</key>
+	<true/>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
