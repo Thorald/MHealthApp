@@ -16,11 +16,11 @@ part 'view/history_view.dart';
 part 'view/duringswim_view.dart';
 
 part 'view_model/connect_viewmodel.dart';
-part 'view_model/home_viewmodel.dart';
 part 'view_model/duringswim_viewmodel.dart';
 
 part 'model/movesense_device_manager.dart';
 part 'model/bathingevent.dart';
+part 'model/dumpmanager.dart';
 
 // ============================================================
 //                          BLOCK
