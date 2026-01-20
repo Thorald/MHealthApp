@@ -59,8 +59,11 @@ class DuringswimViewModel {
     debugPrint(">> sent to database");
 
     // Dump raw heart rate data
-    await _dumpBathingEventToFile(bathingEvent);
+    await dumpBathingEventToFile();
   }
+
+  Future<void> dumpBathingEventToFile() =>
+      _dumpBathingEventToFile(bathingEvent);
 
   void dispose() {
     _timer?.cancel();
