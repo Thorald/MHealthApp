@@ -9,8 +9,17 @@ class ConnectView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Connect'),
         automaticallyImplyLeading: false,
+        toolbarHeight: 200,
+        centerTitle: true,
+        title: const Padding(
+          padding: EdgeInsets.only(top: 150),
+          child: Text(
+            "Connect device",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+            textAlign: TextAlign.center,
+          ),
+        ),
       ),
       body: ConnectViewCenter(viewModel: viewModel),
       bottomNavigationBar: Container(
@@ -22,7 +31,7 @@ class ConnectView extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [            
+          children: [
             InkWell(
               onTap: () => Navigator.pop(context),
               child: const Row(
@@ -51,6 +60,18 @@ class ConnectViewCenter extends StatelessWidget {
     return 'Press to Connect';
   }
 
+  IconData _statusIcon(ConnectViewModel vm) {
+    if (vm.isConnected) return Icons.bluetooth_connected;
+    if (vm.isConnecting) return Icons.bluetooth_searching;
+    return Icons.bluetooth;
+  }
+
+  Color _statusColor(ConnectViewModel vm) {
+    if (vm.isConnected) return Colors.blue;
+    if (vm.isConnecting) return Colors.orange;
+    return Colors.grey;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
@@ -60,10 +81,12 @@ class ConnectViewCenter extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              FloatingActionButton(
-                heroTag: "connectbutton",
-                onPressed: viewModel.connect,
-                child: const Icon(Icons.bluetooth),
+              IconButton.filled(
+                icon: Icon(_statusIcon(viewModel)),
+                padding: const EdgeInsets.all(20),
+                iconSize: 100,
+                color: _statusColor(viewModel),
+                onPressed: viewModel.isConnecting ? null : viewModel.connect,
               ),
               const SizedBox(height: 20),
               Text(
