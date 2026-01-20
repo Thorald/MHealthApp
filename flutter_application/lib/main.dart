@@ -22,6 +22,13 @@ part 'view_model/duringswim_viewmodel.dart';
 part 'model/movesense_device_manager.dart';
 part 'model/bathingevent.dart';
 
+
+part 'view/appstart_view.dart';
+part 'view_model/appstart_viewmodel.dart';
+
+// plus whatever you already have…
+
+
 // ============================================================
 //                          BLOCK
 // ============================================================
@@ -84,7 +91,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'MyFont'),
       title: 'Viking app',
-      home: const HomePage(),
+      home: AppStartView(viewModel: AppStartViewModel()),
     );
   }
 }
