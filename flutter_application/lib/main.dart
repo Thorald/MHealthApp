@@ -1,5 +1,7 @@
 library;
 
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:movesense_plus/movesense_plus.dart';
 import 'dart:async';
@@ -67,7 +69,7 @@ void main() async {
   final dbPath = join(appDir.path, 'viking_app.db');
 
   //Uncomment here to reset database:
-  //await databaseFactoryIo.deleteDatabase(dbPath);
+  await databaseFactoryIo.deleteDatabase(dbPath);
 
   block.database = await databaseFactoryIo.openDatabase(dbPath);
 
