@@ -45,7 +45,7 @@ class _DuringSwimViewState extends State<DuringSwimView> {
                           Text(
                             'saved to "Previous Swims"',
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 18,
                               fontWeight: FontWeight.w400,
                               color: Colors.black,
                             ),
