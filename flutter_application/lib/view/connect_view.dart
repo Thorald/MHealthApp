@@ -87,7 +87,7 @@ class ConnectViewCenter extends StatelessWidget {
                 iconSize: 100,
                 style: IconButton.styleFrom(
                   backgroundColor: _statusBgColor(viewModel),
-                  foregroundColor: const Color.fromARGB(255, 255, 255, 255)
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                 ),
                 onPressed: viewModel.isConnecting ? null : viewModel.connect,
               ),
