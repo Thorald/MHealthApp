@@ -29,7 +29,19 @@ class HistoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Previous Swims')),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        toolbarHeight: 150,
+        centerTitle: false,
+        title: const Padding(
+          padding: EdgeInsets.only(top: 80),
+          child: Text(
+            "Previous Swims",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+            textAlign: TextAlign.start,
+          ),
+        ),
+      ),
       body: FutureBuilder<List<_BathingEventViewData>>(
         future: _loadBathingEvents(),
         builder: (context, snapshot) {
@@ -97,7 +109,7 @@ class HistoryView extends StatelessWidget {
                 ],
               ),
             ),
-          ],
+        ],
         ),
       ),
     );
@@ -117,100 +129,3 @@ class _BathingEventViewData {
     this.longitude,
   });
 }
-
-// class HistoryView extends StatelessWidget {
-//   const HistoryView({super.key});
-
-//   void _onSwimPressed(BuildContext context, String swimName) {
-//     // Replace with your navigation / logic
-//     ScaffoldMessenger.of(context).showSnackBar(
-//       SnackBar(content: Text('Pressed: $swimName')),
-//     );
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('History'),
-//         automaticallyImplyLeading: false,
-//       ),
-//       body: ListView(
-//         padding: const EdgeInsets.all(16),
-//         children: [
-//           // Header row: title left, logo right (aligned on same baseline/row)
-//           Row(
-//             crossAxisAlignment: CrossAxisAlignment.center,
-//             children: [
-//               const Expanded(
-//                 child: Text(
-//                   'Previous swims!',
-//                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-//                 ),
-//               ),
-//               Image.asset(
-//                 'assets/logo.png',
-//                 height: 40,
-//                 width: 40,
-//                 fit: BoxFit.contain,
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 12),
-
-//           // "Buttons" as tappable tiles
-//           Card(
-//             child: ListTile(
-//               title: const Text('Swim 1'),
-//               trailing: const Icon(Icons.chevron_right),
-//               onTap: () => _onSwimPressed(context, 'Swim 1'),
-//             ),
-//           ),
-//           Card(
-//             child: ListTile(
-//               title: const Text('Swim 2'),
-//               trailing: const Icon(Icons.chevron_right),
-//               onTap: () => _onSwimPressed(context, 'Swim 2'),
-//             ),
-//           ),
-//           Card(
-//             child: ListTile(
-//               title: const Text('Swim 3'),
-//               trailing: const Icon(Icons.chevron_right),
-//               onTap: () => _onSwimPressed(context, 'Swim 3'),
-//             ),
-//           ),
-//         ],
-//       ),
-//       bottomNavigationBar: Container(
-//         height: 80,
-//         padding: const EdgeInsets.symmetric(horizontal: 20),
-//         decoration: const BoxDecoration(
-//           color: Color(0xFFF2F2F2),
-//           border: Border(top: BorderSide(color: Color(0xFFDDDDDD))),
-//         ),
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             Image.asset(
-//               'assets/Bluetooth_icon.png',
-//               width: 30,
-//               height: 30,
-//               fit: BoxFit.contain,
-//             ),
-//             InkWell(
-//               onTap: () => Navigator.pop(context),
-//               child: const Row(
-//                 children: [
-//                   Icon(Icons.arrow_back, size: 32),
-//                   SizedBox(width: 8),
-//                   Text('Back', style: TextStyle(fontSize: 18)),
-//                 ],
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

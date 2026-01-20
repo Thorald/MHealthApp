@@ -66,7 +66,6 @@ class ConnectViewCenter extends StatelessWidget {
     return Icons.bluetooth;
   }
 
-  // ONLY background color changes
   Color _statusBgColor(ConnectViewModel vm) {
     if (vm.isConnected) return const Color.fromARGB(255, 65, 215, 70);
     if (vm.isConnecting) return const Color.fromARGB(255, 255, 255, 0);
@@ -92,7 +91,7 @@ class ConnectViewCenter extends StatelessWidget {
                 ),
                 onPressed: viewModel.isConnecting ? null : viewModel.connect,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 80),
               Text(
                 _statusText(viewModel),
                 style: const TextStyle(fontSize: 18),
