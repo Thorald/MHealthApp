@@ -10,67 +10,115 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late final ConnectViewModel connectViewModel;
 
+  Timer? _countdownTimer;
+  int? _countdown;
+
   @override
   void initState() {
     super.initState();
     connectViewModel = ConnectViewModel();
     block.movesenseDeviceManager.addListener(connectViewModel.onDeviceChanged);
-
-    // Optional: sync once on first build
     connectViewModel.onDeviceChanged();
   }
 
   @override
   void dispose() {
-    block.movesenseDeviceManager.removeListener(
-      connectViewModel.onDeviceChanged,
-    );
+    _countdownTimer?.cancel();
+    block.movesenseDeviceManager.removeListener(connectViewModel.onDeviceChanged);
     connectViewModel.dispose();
     super.dispose();
   }
 
-  AppBar myAppBar() => AppBar(
-    toolbarHeight: 170,
-    centerTitle: true,
-    title: const Padding(
-      padding: EdgeInsets.only(top: 130),
-      child: Text(
-        "Let's go for a swim!",
-        style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-        textAlign: TextAlign.center,
-      ),
-    ),
-  );
+  void _startCountdownAndNavigate(BuildContext context) {
+    if (_countdown != null) return;
 
-  Center homePageBody(BuildContext context) => Center(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton.filled(
-          icon: const Icon(Icons.play_arrow_rounded, size: 40),
-          style: IconButton.styleFrom(
-            padding: const EdgeInsets.all(24),
-            backgroundColor: const Color.fromARGB(255, 65, 215, 70),
-            foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+    setState(() => _countdown = 3);
+
+    _countdownTimer?.cancel();
+    _countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      final current = _countdown ?? 0;
+
+      if (current <= 1) {
+        timer.cancel();
+        setState(() => _countdown = null);
+
+        final duringswimViewModel = DuringswimViewModel();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => DuringSwimView(viewModel: duringswimViewModel),
           ),
-          onPressed: () {
-            final duringswimViewModel = DuringswimViewModel();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => DuringSwimView(viewModel: duringswimViewModel),
+        );
+      } else {
+        setState(() => _countdown = current - 1);
+      }
+    });
+  }
+
+  AppBar myAppBar() => AppBar(
+        toolbarHeight: 170,
+        centerTitle: true,
+        title: const Padding(
+          padding: EdgeInsets.only(top: 130),
+          child: Text(
+            "Let's go for a swim!",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+
+  Widget homePageBody(BuildContext context) {
+    return Stack(
+      children: [
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton.filled(
+                icon: const Icon(Icons.play_arrow_rounded, size: 40),
+                style: IconButton.styleFrom(
+                  padding: const EdgeInsets.all(24),
+                  backgroundColor: const Color.fromARGB(255, 65, 215, 70),
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                ),
+                onPressed: (_countdown != null) ? null : () => _startCountdownAndNavigate(context),
               ),
-            );
-          },
+              const SizedBox(width: 35),
+              const Text(
+                'START',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
+              ),
+            ],
+          ),
         ),
-        const SizedBox(width: 35),
-        const Text(
-          'START',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
-        ),
+
+        // Countdown overlay
+        if (_countdown != null)
+          Positioned.fill(
+            child: Container(
+              color: const Color.fromARGB(106, 255, 255, 255).withValues(),
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(106, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    _countdown.toString(),
+                    style: const TextStyle(
+                      fontSize: 80,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
       ],
-    ),
-  );
+    );
+  }
 
   Widget bottomContainer(BuildContext context) {
     return Container(
@@ -106,7 +154,6 @@ class _HomePageState extends State<HomePage> {
                   clipBehavior: Clip.none,
                   children: [
                     const Icon(Icons.bluetooth),
-
                     Positioned(
                       right: -2,
                       top: -2,
@@ -158,13 +205,13 @@ class _ConnectionBadge extends StatelessWidget {
     final IconData icon;
 
     if (isConnecting) {
-      bg = const Color(0xFFFFC107); // yellow
+      bg = const Color(0xFFFFC107);
       icon = Icons.more_horiz;
     } else if (isConnected) {
-      bg = const Color(0xFF4CAF50); // green
+      bg = const Color(0xFF4CAF50);
       icon = Icons.check;
     } else {
-      bg = const Color(0xFFF44336); // red
+      bg = const Color(0xFFF44336);
       icon = Icons.close;
     }
 
