@@ -1,5 +1,88 @@
 part of '../main.dart';
 
+class SwimHistoryTile extends StatelessWidget {
+  final BathingEventViewData event;
+
+  const SwimHistoryTile({
+    super.key,
+    required this.event,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final dt = event.startTime;
+
+    final dateText = '${dt.day}-${dt.month}-${dt.year}';
+    final timeText =
+        '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
+
+    final durationText = event.duration == null
+        ? '--:--'
+        : '${event.duration!.inMinutes.toString().padLeft(2, '0')}:'
+          '${(event.duration!.inSeconds % 60).toString().padLeft(2, '0')}';
+
+    final avgHrText = event.averageHeartRate == null
+        ? '-'
+        : '${event.averageHeartRate!.round()} bpm';
+
+    final hasLocation = event.latitude != null && event.longitude != null;
+    final latText = hasLocation ? event.latitude!.toStringAsFixed(5) : '-';
+    final lonText = hasLocation ? event.longitude!.toStringAsFixed(5) : '-';
+
+    final subtitle = '$timeText • Duration $durationText'
+        '${event.averageHeartRate != null ? ' • Avg HR ${event.averageHeartRate!.round()} bpm' : ''}'
+        '${hasLocation ? ' • Location $latText, $lonText' : ''}';
+
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: ExpansionTile(
+        key: PageStorageKey(dt.toIso8601String()),
+        leading: const Icon(Icons.pool),
+        title: Text(dateText),
+        subtitle: Text(subtitle),
+        childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        children: [
+          _InfoRow(label: 'Time', value: timeText),
+          _InfoRow(label: 'Duration', value: durationText),
+          _InfoRow(label: 'Average HR', value: avgHrText),
+          _InfoRow(label: 'Latitude', value: latText),
+          _InfoRow(label: 'Longitude', value: lonText),
+        ],
+      ),
+    );
+  }
+}
+
+class _InfoRow extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _InfoRow({
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 110,
+            child: Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+          ),
+          Expanded(child: Text(value)),
+        ],
+      ),
+    );
+  }
+}
+
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
 
@@ -23,11 +106,15 @@ class HistoryView extends StatelessWidget {
       body: FutureBuilder<List<BathingEventViewData>>(
         future: viewModel.loadBathingEvents(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final events = snapshot.data!;
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+
+          final events = snapshot.data ?? [];
 
           if (events.isEmpty) {
             return const Center(child: Text('No swims yet'));
@@ -36,38 +123,7 @@ class HistoryView extends StatelessWidget {
           return ListView.builder(
             itemCount: events.length,
             itemBuilder: (context, index) {
-              final event = events[index];
-              final dateTime = event.startTime;
-
-              final durationText = event.duration == null
-                  ? '--:--'
-                  : '${event.duration!.inMinutes.toString().padLeft(2, '0')}:'
-                        '${(event.duration!.inSeconds % 60).toString().padLeft(2, '0')}';
-
-              final avgHrText = event.averageHeartRate != null
-                  ? ' • Avg HR ${event.averageHeartRate!.round()} bpm'
-                  : '';
-
-              final locationText =
-                  (event.latitude != null && event.longitude != null)
-                  ? ' • Location '
-                        '${event.latitude!.toStringAsFixed(5)}, '
-                        '${event.longitude!.toStringAsFixed(5)}'
-                  : '';
-
-              return ListTile(
-                leading: const Icon(Icons.pool),
-                title: Text(
-                  '${dateTime.day}-${dateTime.month}-${dateTime.year}',
-                ),
-                subtitle: Text(
-                  '${dateTime.hour.toString().padLeft(2, '0')}:'
-                  '${dateTime.minute.toString().padLeft(2, '0')}'
-                  ' • Duration $durationText'
-                  '$avgHrText'
-                  '$locationText',
-                ),
-              );
+              return SwimHistoryTile(event: events[index]);
             },
           );
         },
