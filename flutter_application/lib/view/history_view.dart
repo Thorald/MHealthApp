@@ -16,12 +16,15 @@ class HistoryView extends StatelessWidget {
 
       final latitude = record.value['latitude'] as double?;
       final longitude = record.value['longitude'] as double?;
+      final averageHeartRate = (record.value['averageHeartRate'] as num?)
+          ?.toDouble();
 
       return _BathingEventViewData(
         startTime: start,
         duration: duration,
         latitude: latitude,
         longitude: longitude,
+        averageHeartRate: averageHeartRate,
       );
     }).toList();
   }
@@ -72,6 +75,9 @@ class HistoryView extends StatelessWidget {
                         '${event.latitude!.toStringAsFixed(5)}, '
                         '${event.longitude!.toStringAsFixed(5)}'
                   : '';
+              final avgHrText = event.averageHeartRate != null
+                  ? ' • Avg HR ${event.averageHeartRate!.round()} bpm'
+                  : '';
 
               return ListTile(
                 leading: const Icon(Icons.pool),
@@ -82,6 +88,7 @@ class HistoryView extends StatelessWidget {
                   '${dateTime.hour.toString().padLeft(2, '0')}:'
                   '${dateTime.minute.toString().padLeft(2, '0')}'
                   ' • Duration $durationText'
+                  '$avgHrText'
                   '$locationText',
                 ),
               );
@@ -121,11 +128,13 @@ class _BathingEventViewData {
   final Duration? duration;
   final double? latitude;
   final double? longitude;
+  final double? averageHeartRate;
 
   _BathingEventViewData({
     required this.startTime,
     required this.duration,
     this.latitude,
     this.longitude,
+    this.averageHeartRate,
   });
 }
