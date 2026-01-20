@@ -53,8 +53,9 @@ class HistoryView extends StatelessWidget {
           }
 
           final events = snapshot.data!;
-          events.sort((a, b) => b.startTime.compareTo(a.startTime)); // newest first
-
+          events.sort(
+            (a, b) => b.startTime.compareTo(a.startTime),
+          ); // newest first
 
           if (events.isEmpty) {
             return const Center(child: Text('No swims yet'));
@@ -118,7 +119,7 @@ class HistoryView extends StatelessWidget {
                 ],
               ),
             ),
-        ],
+          ],
         ),
       ),
     );
