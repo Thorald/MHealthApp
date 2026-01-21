@@ -55,11 +55,19 @@ class DuringswimViewModel {
     }
 
     // Save to database
-    await bathingEventStore.add(block.database, bathingEvent.toJson());
-    debugPrint('>> sent to database');
+    try {
+      await bathingEventStore.add(block.database, bathingEvent.toJson());
+      debugPrint('>> sent to database');
+    } catch (e) {
+      debugPrint('>> Failed to save to database: $e');
+    }
 
-    // Dump JSON file
-    await DumpManager.dumpBathingEvent(bathingEvent);
+    // Dump Json file
+    try {
+      await DumpManager.dumpBathingEvent(bathingEvent);
+    } catch (e) {
+      debugPrint('>> Failed to dump JSON file: $e');
+    }
   }
 
   void dispose() {
