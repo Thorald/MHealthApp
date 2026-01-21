@@ -1,5 +1,8 @@
 part of '../main.dart';
 
+/// Utility class responsible for exporting bathing event data.
+/// [dumpBathingEvent] writes a single [BathingEvent] to a JSON file.
+/// The file is stored locally on the device.
 class DumpManager {
   static Future<void> dumpBathingEvent(BathingEvent event) async {
     final dir = await getApplicationDocumentsDirectory();
