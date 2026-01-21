@@ -1,15 +1,11 @@
 part of '../main.dart';
 
-// If this file is a `part of`, put this import in main.dart instead.
 // import 'package:geocoding/geocoding.dart';
 
 class SwimHistoryTile extends StatelessWidget {
   final BathingEventViewData event;
 
-  const SwimHistoryTile({
-    super.key,
-    required this.event,
-  });
+  const SwimHistoryTile({super.key, required this.event});
 
   static final Map<String, Future<String?>> _cityCache = {};
 
@@ -23,17 +19,15 @@ class SwimHistoryTile extends StatelessWidget {
     final city = (p.locality != null && p.locality!.trim().isNotEmpty)
         ? p.locality!.trim()
         : (p.subLocality != null && p.subLocality!.trim().isNotEmpty)
-            ? p.subLocality!.trim()
-            : (p.subAdministrativeArea != null &&
-                    p.subAdministrativeArea!.trim().isNotEmpty)
-                ? p.subAdministrativeArea!.trim()
-                : (p.administrativeArea != null &&
-                        p.administrativeArea!.trim().isNotEmpty)
-                    ? p.administrativeArea!.trim()
-                    : null;
+        ? p.subLocality!.trim()
+        : (p.subAdministrativeArea != null &&
+              p.subAdministrativeArea!.trim().isNotEmpty)
+        ? p.subAdministrativeArea!.trim()
+        : (p.administrativeArea != null &&
+              p.administrativeArea!.trim().isNotEmpty)
+        ? p.administrativeArea!.trim()
+        : null;
 
-    // Debug output to see what the platform returns.
-    // ignore: avoid_print
     print(
       'Reverse geocode -> locality=${p.locality}, subLocality=${p.subLocality}, '
       'subAdmin=${p.subAdministrativeArea}, admin=${p.administrativeArea}, '
@@ -47,18 +41,19 @@ class SwimHistoryTile extends StatelessWidget {
     final key = '${lat.toStringAsFixed(5)},${lon.toStringAsFixed(5)}';
 
     return _cityCache.putIfAbsent(key, () {
-      return _cityFromCoords(lat, lon).then((city) {
-        // Do not cache failures/null; allow retry next build/session.
-        if (city == null || city.trim().isEmpty) {
-          _cityCache.remove(key);
-        }
-        return city;
-      }).catchError((e) {
-        _cityCache.remove(key);
-        // ignore: avoid_print
-        print('Reverse geocode error: $e');
-        return null;
-      });
+      return _cityFromCoords(lat, lon)
+          .then((city) {
+            if (city == null || city.trim().isEmpty) {
+              _cityCache.remove(key);
+            }
+            return city;
+          })
+          .catchError((e) {
+            _cityCache.remove(key);
+            // ignore: avoid_print
+            print('Reverse geocode error: $e');
+            return null;
+          });
     });
   }
 
@@ -73,7 +68,7 @@ class SwimHistoryTile extends StatelessWidget {
     final durationText = event.duration == null
         ? '--:--'
         : '${event.duration!.inMinutes.toString().padLeft(2, '0')}:'
-            '${(event.duration!.inSeconds % 60).toString().padLeft(2, '0')}';
+              '${(event.duration!.inSeconds % 60).toString().padLeft(2, '0')}';
 
     final avgHrText = event.averageHeartRate == null
         ? '-'
@@ -127,10 +122,7 @@ class _InfoRow extends StatelessWidget {
   final String label;
   final String value;
 
-  const _InfoRow({
-    required this.label,
-    required this.value,
-  });
+  const _InfoRow({required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
