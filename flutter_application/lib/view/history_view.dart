@@ -1,7 +1,5 @@
 part of '../main.dart';
 
-// import 'package:geocoding/geocoding.dart';
-
 class SwimHistoryTile extends StatelessWidget {
   final BathingEventViewData event;
 
