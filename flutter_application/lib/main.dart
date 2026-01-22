@@ -45,6 +45,10 @@ final WeatherFactory weatherFactory = WeatherFactory(
   language: Language.ENGLISH,
 );
 
+// ============================================================
+//                       PERMISSIONS
+// ============================================================
+
 Future<void> requestLocationPermission() async {
   LocationPermission permission = await Geolocator.checkPermission();
 
