@@ -35,6 +35,7 @@ class Block {
 
   late final Database database;
 
+  /// Add API key from https://home.openweathermap.org to add weather info to [BathingEvent]
   final String openWeatherApiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
 }
 
