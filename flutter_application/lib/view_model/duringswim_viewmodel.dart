@@ -42,6 +42,7 @@ class DuringswimViewModel {
 
     bathingEvent.eventTimeEnded = DateTime.now();
 
+    // Get location
     try {
       final position = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
@@ -52,6 +53,21 @@ class DuringswimViewModel {
       bathingEvent.longitude = position.longitude;
     } catch (e) {
       debugPrint('>> Location not available: $e');
+    }
+
+    // Get weather (only if location is known)
+    if (bathingEvent.latitude != null && bathingEvent.longitude != null) {
+      try {
+        final w = await weatherFactory.currentWeatherByLocation(
+          bathingEvent.latitude!,
+          bathingEvent.longitude!,
+        );
+
+        bathingEvent.temperatureC = w.temperature?.celsius;
+        bathingEvent.weatherDescription = w.weatherDescription;
+      } catch (e) {
+        debugPrint('>> Weather not available: $e');
+      }
     }
 
     // Save to database

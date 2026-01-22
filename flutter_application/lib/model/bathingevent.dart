@@ -1,12 +1,5 @@
 part of '../main.dart';
 
-/// Data model representing a winter bathing session.
-/// [eventTimeStarted] marks when the swim began.
-/// [eventTimeEnded] marks when the swim ended.
-/// [latitude] and [longitude] store the location of the swim.
-/// [pulses] contains a list of heart rate measurements recorded during the swim.
-/// [duration] is calculated from eventTimeStarted and eventTimeEnded
-/// The [toJson] function is used for sending to sembast!
 class BathingEvent {
   final DateTime eventTimeStarted;
   DateTime? eventTimeEnded;
@@ -15,6 +8,9 @@ class BathingEvent {
   double? longitude;
 
   List<int> pulses = [];
+
+  double? temperatureC;
+  String? weatherDescription;
 
   BathingEvent() : eventTimeStarted = DateTime.now();
 
@@ -36,6 +32,10 @@ class BathingEvent {
       'longitude': longitude,
       'pulses': pulses,
       'averageHeartRate': averageHeartRate,
+
+      // Weather
+      'temperatureC': temperatureC,
+      'weatherDescription': weatherDescription,
     };
   }
 }

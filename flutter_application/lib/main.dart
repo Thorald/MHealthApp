@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:weather/weather.dart';
 
 part 'view/home_view.dart';
 part 'view/connect_view.dart';
@@ -33,10 +34,16 @@ class Block {
       MovesenseDeviceManager();
 
   late final Database database;
+
+  final String openWeatherApiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
 }
 
-// Create Singleton
+// Create Singletons
 final block = Block();
+final WeatherFactory weatherFactory = WeatherFactory(
+  block.openWeatherApiKey,
+  language: Language.ENGLISH,
+);
 
 Future<void> requestLocationPermission() async {
   LocationPermission permission = await Geolocator.checkPermission();

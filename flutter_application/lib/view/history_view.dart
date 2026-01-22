@@ -72,6 +72,12 @@ class SwimHistoryTile extends StatelessWidget {
         ? '-'
         : '${event.averageHeartRate!.round()} bpm';
 
+    final weatherText =
+        (event.temperatureC != null || event.weatherDescription != null)
+        ? '${event.temperatureC != null ? '${event.temperatureC!.round()} °C' : '-'}'
+              '${event.weatherDescription != null && event.weatherDescription!.trim().isNotEmpty ? ' • ${event.weatherDescription}' : ''}'
+        : '-';
+
     final hasLocation = event.latitude != null && event.longitude != null;
 
     final Future<String?> cityFuture = hasLocation
@@ -108,6 +114,7 @@ class SwimHistoryTile extends StatelessWidget {
               _InfoRow(label: 'Duration', value: durationText),
               _InfoRow(label: 'Average HR', value: avgHrText),
               _InfoRow(label: 'City', value: cityValue),
+              _InfoRow(label: 'Weather', value: weatherText),
             ],
           );
         },

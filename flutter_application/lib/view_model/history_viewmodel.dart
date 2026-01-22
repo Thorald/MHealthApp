@@ -17,18 +17,22 @@ class HistoryViewModel {
       final averageHeartRate = (record.value['averageHeartRate'] as num?)
           ?.toDouble();
 
+      // Weather (optional)
+      final temperatureC = (record.value['temperatureC'] as num?)?.toDouble();
+      final weatherDescription = record.value['weatherDescription'] as String?;
+
       return BathingEventViewData(
         startTime: start,
         duration: duration,
         latitude: latitude,
         longitude: longitude,
         averageHeartRate: averageHeartRate,
+        temperatureC: temperatureC,
+        weatherDescription: weatherDescription,
       );
     }).toList();
 
-    // Newest first
     events.sort((a, b) => b.startTime.compareTo(a.startTime));
-
     return events;
   }
 }
@@ -40,11 +44,17 @@ class BathingEventViewData {
   final double? longitude;
   final double? averageHeartRate;
 
+  // Weather (optional)
+  final double? temperatureC;
+  final String? weatherDescription;
+
   BathingEventViewData({
     required this.startTime,
     required this.duration,
     this.latitude,
     this.longitude,
     this.averageHeartRate,
+    this.temperatureC,
+    this.weatherDescription,
   });
 }
