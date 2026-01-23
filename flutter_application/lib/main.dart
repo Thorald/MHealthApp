@@ -39,7 +39,7 @@ class Block {
   final String openWeatherApiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
 }
 
-// Create Singletons
+// Create Global Instance
 final block = Block();
 final WeatherFactory weatherFactory = WeatherFactory(
   block.openWeatherApiKey,
