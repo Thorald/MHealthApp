@@ -17,11 +17,14 @@ The app consists of the following main views:
 
 ## Screenshots
 
-![Connect view](images/IMG_7253.PNG)
-![Home view](images/IMG_7254.PNG)
-![During swim view](images/IMG_7255.PNG)
-![History view](images/IMG_7256.PNG)
+## Screenshots
 
+<p align="center">
+  <img src="images/IMG_7253.PNG" width="250">
+  <img src="images/IMG_7254.PNG" width="250">
+  <img src="images/IMG_7255.PNG" width="250">
+  <img src="images/IMG_7256.PNG" width="250">
+</p>
 ---
 
 ## App Flow
