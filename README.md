@@ -84,3 +84,8 @@ The app uses Sembast as a local database.
 - To add weather data from: https://home.openweathermap.org one needs to go to this website and generate a free API key. This can then be inserted in [main](flutter_application/lib/main.dart).
 - Also to get all location/bluetooth data, these need to be permitted, which is automatically initiated on the apps first startup.
 
+---
+
+## Further information
+
+for further information please see our [overleaf_project](overleaf_project/mHealth_projekt.pdf)
