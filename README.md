@@ -7,14 +7,20 @@ Swim sessions are stored locally and can be viewed later.
 
 ## Overview
 
-Each swim is represented by a BathingEvent object.
-A new BathingEvent is created when the user presses START and is saved when the user presses STOP.
-
 The app consists of the following main views:
 - Home view
 - During swim view
 - History view
 - Connect view
+
+---
+
+## Screenshots
+
+![Connect view](images/IMG_7253.PNG)
+![Home view](images/IMG_7254.PNG)
+![During swim view](images/IMG_7255.PNG)
+![History view](images/IMG_7256.PNG)
 
 ---
 
