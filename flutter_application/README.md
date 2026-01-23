@@ -1,3 +1,3 @@
 # flutter_application
 
-A new Flutter project.
+This is our flutter application.
