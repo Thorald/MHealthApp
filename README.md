@@ -24,6 +24,7 @@ The app consists of the following main views:
   <img src="images/IMG_7255.PNG" width="200">
   <img src="images/IMG_7256.PNG" width="200">
 </p>
+
 ---
 
 ## App Flow
@@ -79,6 +80,7 @@ The app uses Sembast as a local database.
 ## How to setup App.
 
 - To connect you must use a personal UUID/BlueTooth address this needs to be changed in the [Movesense device manager](flutter_application/lib/model/movesense_device_manager.dart)
-- The App has not been testet on Android but in theory a BlueTooth address should work for this system. Use UUID for Iphone.
-- To add weather data from Open
+- The App has not been testet on Android but in theory a BlueTooth address should work for that system. Use UUID for Iphone.
+- To add weather data from: https://home.openweathermap.org one needs to go to this website and generate a free API key. This can then be inserted in [main](flutter_application/lib/main).
+- Also to get all location/bluetooth data, these need to be permitted, which is automatically initiated on the apps first startup.
 
