@@ -53,32 +53,28 @@ The app consists of the following main views:
 
 ## Persistence
 
-The app uses Sembast as a local database.
+The app uses Sembast as a local NoSQL database.
 
-- The database instance is stored in Block
-- Database is stored localy on iphone at address /var/mobile/Containers/Data/Application/"your_specific_UUID"/Documents/
+- The database instance is managed by the `Block` class.
+- On iOS, the database file is stored in the app’s sandboxed
+  `Documents` directory, resolved at runtime using `path_provider`.
+- Internally, this corresponds to a path of the form:
+  `/var/mobile/Containers/Data/Application/<UUID>/Documents/`
 
 ---
 
 ## Architecture
 
-- Block
-  Creates the models
-
-- ViewModels
-  Communication between views and models
-
-- Views
-  Handle UI and navigation
-
-- Models
-  Holds long-lived services
+- `Block` is responsible for instantiating and holding long-lived services.
+- ViewModels mediate communication between the Views and the Models.
+- Views handle UI rendering and user navigation.
+- Models encapsulate data structures and long-lived services.
 
 ---
 
 ## How to setup App.
 
-- To connect you must use a personal UUID/BlueTooth address this needs to be changed in the [Movesense device manager](flutter_application/lib/model/movesense_device_manager.dart)
+- To connect you must use a personal UUID/BlueTooth address. This needs to be changed in the [Movesense device manager](flutter_application/lib/model/movesense_device_manager.dart)
 - The App has not been testet on Android but in theory a BlueTooth address should work for that system. Use UUID for Iphone.
 - To add weather data from: https://home.openweathermap.org one needs to go to this website and generate a free API key. This can then be inserted in [main](flutter_application/lib/main.dart).
 - Also to get all location/bluetooth data, these need to be permitted, which is automatically initiated on the apps first startup.
