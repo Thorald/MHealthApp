@@ -17,13 +17,12 @@ The app consists of the following main views:
 
 ## Screenshots
 
-## Screenshots
 
 <p align="center">
-  <img src="images/IMG_7253.PNG" width="250">
-  <img src="images/IMG_7254.PNG" width="250">
-  <img src="images/IMG_7255.PNG" width="250">
-  <img src="images/IMG_7256.PNG" width="250">
+  <img src="images/IMG_7253.PNG" width="200">
+  <img src="images/IMG_7254.PNG" width="200">
+  <img src="images/IMG_7255.PNG" width="200">
+  <img src="images/IMG_7256.PNG" width="200">
 </p>
 ---
 
@@ -54,10 +53,10 @@ The app consists of the following main views:
 
 The app uses Sembast as a local database.
 
-- The database is opened once in main()
 - The database instance is stored in Block
 - Swim sessions are stored in the "bathing_events" store
 - DateTimes are saved as UTC ISO 8601 strings
+- Database is stored localy on iphone at address /var/mobile/Containers/Data/Application/"your_specific_UUID"/Documents/
 
 ---
 
@@ -73,10 +72,13 @@ The app uses Sembast as a local database.
   Handle UI and navigation
 
 - Models
-  Holds long-lived services (MovesenseDeviceManager, database)
+  Holds long-lived services
 
 ---
 
-## Notes
+## How to setup App.
 
-- To connect you must use a personal UUID/BlueTooth address to connect.
+- To connect you must use a personal UUID/BlueTooth address this needs to be changed in the [Movesense device manager](flutter_application/lib/model/movesense_device_manager.dart)
+- The App has not been testet on Android but in theory a BlueTooth address should work for this system. Use UUID for Iphone.
+- To add weather data from Open
+
