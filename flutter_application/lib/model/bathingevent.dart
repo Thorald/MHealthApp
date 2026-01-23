@@ -1,5 +1,15 @@
 part of '../main.dart';
 
+/// Represents a single bathing event with time, location, and physiological data.
+/// [eventTimeStarted] marks when the bathing event began.
+/// [eventTimeEnded] marks when the event ended and may be null if ongoing.
+/// [latitude] and [longitude] store the geographical location of the event.
+/// [pulses] contains recorded heart rate measurements during the event.
+/// [temperatureC] represents the water or ambient temperature in Celsius.
+/// [weatherDescription] provides a textual description of the weather conditions.
+/// [duration] returns the total duration of the event if it has ended.
+/// [averageHeartRate] computes the mean heart rate from recorded pulses.
+/// [toJson] serializes the bathing event data into JSON
 class BathingEvent {
   final DateTime eventTimeStarted;
   DateTime? eventTimeEnded;
