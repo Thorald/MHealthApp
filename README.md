@@ -20,9 +20,9 @@ The app consists of the following main views:
 
 <p align="center">
   <img src="images/IMG_7253.PNG" width="200">
+  <img src="images/IMG_7256.PNG" width="200">
   <img src="images/IMG_7254.PNG" width="200">
   <img src="images/IMG_7255.PNG" width="200">
-  <img src="images/IMG_7256.PNG" width="200">
 </p>
 
 ---
@@ -42,11 +42,12 @@ The app consists of the following main views:
    - Live heart rate is shown using a stream
    - User presses STOP
    - The BathingEvent is saved to the local database (Sembast)
+   - Json file is also dumped to /var/mobile/Containers/Data/Application/"your_specific_UUID"/Documents/
    - User can navigate back to Home
 
 4. History View
    - Loads BathingEvents from the database
-   - Displays swim times in a list
+   - Displays swims in a listview
 
 ---
 
@@ -55,8 +56,6 @@ The app consists of the following main views:
 The app uses Sembast as a local database.
 
 - The database instance is stored in Block
-- Swim sessions are stored in the "bathing_events" store
-- DateTimes are saved as UTC ISO 8601 strings
 - Database is stored localy on iphone at address /var/mobile/Containers/Data/Application/"your_specific_UUID"/Documents/
 
 ---
